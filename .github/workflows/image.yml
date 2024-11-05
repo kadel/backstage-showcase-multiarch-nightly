@@ -17,7 +17,7 @@ jobs:
           - linux/arm64
     steps:
 
-      - name: Checkout tools repo
+      - name: checkout
         uses: actions/checkout@v4
         with:
           repository: janus-idp/backstage-showcase
@@ -26,6 +26,7 @@ jobs:
         run: |
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
+          ls
       
       - name: Docker meta
         id: meta
