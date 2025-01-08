@@ -7,8 +7,8 @@ on:
     - cron: "15 1 * * *" 
 
 env:
-  REGISTRY: ghcr.io
-  REGISTRY_IMAGE: kadel/backstage-showcase-multiarch-nightly
+  REGISTRY: quay.io
+  REGISTRY_IMAGE: tkral/backstage-showcase-multiarch-nightly
 
 
 jobs:
@@ -62,8 +62,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.repository_owner }}
-          password: ${{ github.token }}
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
       
       - name: Build and push by digest
         id: build
@@ -116,8 +116,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.repository_owner }}
-          password: ${{ github.token }}
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
       
       - name: Create manifest list and push
         working-directory: /tmp/digests
